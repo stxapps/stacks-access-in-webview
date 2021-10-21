@@ -1,0 +1,11 @@
+* Setup
+- npx create-react-app stacks-access-in-webview
+- yarn add @stacks/auth @stacks/storage @stacks/wallet-sdk
+- yarn add tailwindcss postcss postcss-cli autoprefixer
+- yarn add @tailwindcss/aspect-ratio @tailwindcss/forms @tailwindcss/line-clamp @tailwindcss/typography
+- yarn add @types/jest @types/node @types/react @types/react-dom
+- Need to bundle to just one index.html
+  + yarn add @craco/craco
+  + add craco.config.js
+  + ref: pangyiwei.medium.com/building-a-react-app-as-a-single-html-file-with-create-react-app-no-eject-283a141e7635
+- Need to hard-coded font names with hash values!
