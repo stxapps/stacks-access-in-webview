@@ -16,7 +16,6 @@ const SignIn = (props) => {
   const [secretKeyInput, setSecretKeyInput] = useState('');
   const [errMsg, setErrMsg] = useState('');
   const walletData = useRef(null);
-  const scrollView = useRef(null);
   const textarea = useRef(null);
   const didClick = useRef(false);
 
@@ -96,14 +95,14 @@ const SignIn = (props) => {
       window.document.activeElement.blur();
     }
 
-    if (scrollView.current) scrollView.current.scrollTo(0, 0);
+    window.scrollTo(0, 0);
     if (viewId === VIEW_YOUR) setTimeout(() => textarea.current.focus(), 1);
   }, [viewId]);
 
   const _render = (content) => {
     return (
       <React.Fragment>
-        <div ref={scrollView} className="relative flex-1 overflow-x-hidden overflow-y-auto px-4 sm:px-6">
+        <div className="relative overflow-x-hidden px-4 sm:px-6">
           {content}
           <div className="absolute top-0 right-0 p-1">
             <button onClick={props.onPopupCloseBtnClick} className="flex items-center justify-center h-7 w-7 group focus:outline-none" aria-label="Close sign in popup">
