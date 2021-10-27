@@ -1,13 +1,14 @@
 {
-  "name": "stacks-sign-up-in-webview",
+  "name": "stacks-access-sign-up",
   "version": "0.0.0",
   "private": true,
   "scripts": {
     "start": "HTTPS=true BROWSER=none react-scripts start",
     "build-css-dev": "postcss tailwind.css -o src/stylesheets/tailwind.css",
+    "patch-js": "node bin/patch.js",
     "build-css": "postcss tailwind.css -o src/stylesheets/tailwind.css --env production",
     "build-js": "craco build",
-    "build": "yarn run build-css && yarn run build-js",
+    "build": "yarn run patch-js && yarn run build-css && yarn run build-js",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },

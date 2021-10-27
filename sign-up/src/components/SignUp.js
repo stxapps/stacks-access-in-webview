@@ -69,18 +69,20 @@ const SignUp = (props) => {
 
     didClick.current = true;
     setLoadingShown(true);
-    walletApi.createAccount().then((data) => {
-      didClick.current = false;
-      setLoadingShown(false);
+    setTimeout(() => {
+      walletApi.createAccount().then((data) => {
+        didClick.current = false;
+        setLoadingShown(false);
 
-      walletData.current = data;
-      setViewId(VIEW_YOUR);
-    }).catch((e) => {
-      console.log('onGetSecretKeyBtnClick error: ', e);
-      didClick.current = false;
-      setLoadingShown(false);
-      setErrorShown(true);
-    });
+        walletData.current = data;
+        setViewId(VIEW_YOUR);
+      }).catch((e) => {
+        console.log('onGetSecretKeyBtnClick error: ', e);
+        didClick.current = false;
+        setLoadingShown(false);
+        setErrorShown(true);
+      });
+    }, 1);
   };
 
   const onSignInBtnClick = () => {
@@ -104,18 +106,20 @@ const SignUp = (props) => {
 
     didClick.current = true;
     setLoadingShown(true);
-    walletApi.chooseAccount(
-      walletData.current, { domainName, appName, appIconUrl, appScopes }, 0
-    ).then((data) => {
-      didClick.current = false;
-      setLoadingShown(false);
-      props.onBackedUpBtnClick(data);
-    }).catch((e) => {
-      console.log('onBackedUpBtnClick error: ', e);
-      didClick.current = false;
-      setLoadingShown(false);
-      setErrorShown(true);
-    });
+    setTimeout(() => {
+      walletApi.chooseAccount(
+        walletData.current, { domainName, appName, appIconUrl, appScopes }, 0
+      ).then((data) => {
+        didClick.current = false;
+        setLoadingShown(false);
+        props.onBackedUpBtnClick(data);
+      }).catch((e) => {
+        console.log('onBackedUpBtnClick error: ', e);
+        didClick.current = false;
+        setLoadingShown(false);
+        setErrorShown(true);
+      });
+    }, 1);
   };
 
   useEffect(() => {
@@ -245,7 +249,7 @@ const SignUp = (props) => {
           <button onClick={onBackedUpBtnClick} className="w-full py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-600" type="button">I've backed up my Secret Key</button>
           <button onClick={onAgainBtnClick} className="mt-2 w-full py-2 px-4 border border-transparent text-sm font-medium rounded-md text-blue-700 bg-white hover:text-blue-800 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-blue-600" type="button">View Secret Key again</button>
         </div>
-        <ul className="mt-32 mb-8 border-t border-b border-gray-200 divide-y divide-gray-200">
+        <ul className="mt-24 mb-8 border-t border-b border-gray-200 divide-y divide-gray-200">
           {faqs2.map(faq => <ExpListItem key={faq.key} title={faq.title} body={faq.body} />)}
         </ul>
       </React.Fragment>

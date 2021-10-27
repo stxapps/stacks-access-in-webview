@@ -9,3 +9,6 @@
   + add craco.config.js
   + ref: pangyiwei.medium.com/building-a-react-app-as-a-single-html-file-with-create-react-app-no-eject-283a141e7635
 - Need to hard-coded font names with hash values!
+* Patches
+- fetchPrivate
+  + In webview, fetch with no-referrer throws an error!

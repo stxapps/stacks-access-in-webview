@@ -19,16 +19,20 @@ const App = () => {
 
   const onBackedUpBtnClick = (data) => {
     if (window.ReactNativeWebView) {
-      window.ReactNativeWebView.postMessage('');
+      window.ReactNativeWebView.postMessage('update:UserData:' + JSON.stringify(data));
     }
   };
 
-  const updateSignUpProps = (props) => {
-    setSignUpProps(props);
+  const updateSignUpProps = (domainName, appName, appIconUrl, appScopes) => {
+    setSignUpProps({ domainName, appName, appIconUrl, appScopes: appScopes.split(',') });
   };
 
   useEffect(() => {
-    window.stacksSignUp = { updateSignUpProps };
+    window.StacksAccessSignUp = { updateSignUpProps };
+
+    if (window.ReactNativeWebView) {
+      window.ReactNativeWebView.postMessage('editor:isReady:true');
+    }
   }, []);
 
   if (!signUpProps) return null;
