@@ -1,0 +1,61 @@
+{
+  "name": "stacks-access-sign-in",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "start": "HTTPS=true BROWSER=none react-scripts start",
+    "build-css-dev": "postcss tailwind.css -o src/stylesheets/tailwind.css",
+    "patch-js": "node bin/patch.js",
+    "build-css": "postcss tailwind.css -o src/stylesheets/tailwind.css --env production",
+    "build-js": "craco build",
+    "build": "yarn run patch-js && yarn run build-css && yarn run build-js",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
+  "dependencies": {
+    "@craco/craco": "^6.3.0",
+    "@stacks/auth": "^2.0.1",
+    "@stacks/storage": "^2.0.1",
+    "@stacks/wallet-sdk": "^2.0.1",
+    "@tailwindcss/aspect-ratio": "^0.3.0",
+    "@tailwindcss/forms": "^0.3.4",
+    "@tailwindcss/line-clamp": "^0.2.2",
+    "@tailwindcss/typography": "^0.4.1",
+    "@testing-library/jest-dom": "^5.11.4",
+    "@testing-library/react": "^11.1.0",
+    "@testing-library/user-event": "^12.1.10",
+    "@types/jest": "^27.0.2",
+    "@types/node": "^16.11.1",
+    "@types/react": "^17.0.30",
+    "@types/react-dom": "^17.0.10",
+    "autoprefixer": "^10.3.7",
+    "postcss": "^8.3.9",
+    "postcss-cli": "^9.0.1",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "react-graceful-image": "^1.5.0",
+    "react-scripts": "4.0.3",
+    "tailwindcss": "^2.2.17",
+    "web-vitals": "^1.0.1"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not ie <= 99",
+      "not android <= 4.4.4",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  }
+}
