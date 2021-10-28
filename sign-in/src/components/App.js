@@ -7,19 +7,19 @@ const App = () => {
 
   const onPopupCloseBtnClick = () => {
     if (window.ReactNativeWebView) {
-      window.ReactNativeWebView.postMessage('update:SignInPopup:false');
+      window.ReactNativeWebView.postMessage('update:signInPopup:false');
     }
   };
 
   const onSignUpBtnClick = () => {
     if (window.ReactNativeWebView) {
-      window.ReactNativeWebView.postMessage('update:SignUpPopup:true');
+      window.ReactNativeWebView.postMessage('update:signUpPopup:true');
     }
   };
 
   const onChooseAccountBtnClick = (data) => {
     if (window.ReactNativeWebView) {
-      window.ReactNativeWebView.postMessage('update:UserData:' + JSON.stringify(data));
+      window.ReactNativeWebView.postMessage('update:userData:' + JSON.stringify(data));
     }
   };
 

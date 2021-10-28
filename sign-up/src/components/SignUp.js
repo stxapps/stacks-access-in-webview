@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 
 import walletApi from '../apis/wallet';
-import { isString, randomString, copyTextToClipboard } from '../utils';
+import { isString, copyTextToClipboard } from '../utils';
 
 const VIEW_START = 1;
 const VIEW_YOUR = 2;
@@ -56,11 +56,10 @@ const faqs2 = [
 const SignUp = (props) => {
 
   const { domainName, appName, appIconUrl, appScopes } = props;
-  const [viewId, setViewId] = useState(VIEW_START);
+  const [viewId, setViewId] = useState(props.viewId);
   const [isLoadingShown, setLoadingShown] = useState(false);
   const [isErrorShown, setErrorShown] = useState(false);
-  const walletData = useRef(null);
-  const prevViewId = useRef(viewId);
+  const walletData = useRef(props.walletData);
   const didClick = useRef(false);
 
   const onGetSecretKeyBtnClick = () => {
@@ -73,8 +72,10 @@ const SignUp = (props) => {
         didClick.current = false;
         setLoadingShown(false);
 
-        walletData.current = data;
+        props.onGetSecretKeyBtnClick(VIEW_YOUR, data);
+
         setViewId(VIEW_YOUR);
+        walletData.current = data;
       }).catch((e) => {
         console.log('onGetSecretKeyBtnClick error: ', e);
         didClick.current = false;
@@ -84,19 +85,17 @@ const SignUp = (props) => {
     }, 1);
   };
 
-  const onSignInBtnClick = () => {
-    props.onSignInBtnClick();
-  };
-
   const onClipboardBtnClick = () => {
     copyTextToClipboard(walletData.current.secretKey);
   };
 
   const onSavedBtnClick = () => {
+    props.onUpdateViewIdBtnClick(VIEW_SAVE);
     setViewId(VIEW_SAVE);
   };
 
   const onAgainBtnClick = () => {
+    props.onUpdateViewIdBtnClick(VIEW_YOUR);
     setViewId(VIEW_YOUR);
   };
 
@@ -120,20 +119,6 @@ const SignUp = (props) => {
       });
     }, 1);
   };
-
-  useEffect(() => {
-    if (viewId === VIEW_YOUR && prevViewId.current === VIEW_START) {
-      if (window.PasswordCredential) {
-        const data = {
-          id: `U-${randomString(8)}`,
-          password: walletData.current.secretKey,
-        };
-        const cred = new window.PasswordCredential(data);
-        navigator.credentials.store(cred);
-      }
-    }
-    prevViewId.current = viewId;
-  }, [viewId]);
 
   useEffect(() => {
     if (window.document.activeElement instanceof HTMLButtonElement) {
@@ -207,7 +192,7 @@ const SignUp = (props) => {
           <button onClick={onGetSecretKeyBtnClick} className="w-full py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-600" type="button">Get your Secret Key</button>
         </div>
         <div className="flex mt-10 pt-1 mb-1.5">
-          <button onClick={onSignInBtnClick} className="text-sm font-medium text-blue-700 rounded-sm hover:text-blue-800 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-1 focus-visible:ring-blue-600" type="button">Sign in</button>
+          <button onClick={props.onSignInBtnClick} className="text-sm font-medium text-blue-700 rounded-sm hover:text-blue-800 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-1 focus-visible:ring-blue-600" type="button">Sign in</button>
           <a className="ml-3 text-sm font-medium text-blue-700 rounded-sm hover:text-blue-800 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-1 focus-visible:ring-blue-600" href="https://docs.stacks.co/build-apps/guides/authentication#how-it-works" target="_blank" rel="noreferrer">How it works</a>
         </div>
       </React.Fragment>

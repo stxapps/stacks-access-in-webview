@@ -80,17 +80,6 @@ const SignIn = (props) => {
   };
 
   useEffect(() => {
-    if (viewId === VIEW_YOUR) {
-      if (window.PasswordCredential) {
-        const opts = { password: true, mediation: 'required' };
-        navigator.credentials.get(opts).then((cred) => {
-          if (cred && cred.password) setSecretKeyInput(cred.password);
-        });
-      }
-    }
-  }, [viewId]);
-
-  useEffect(() => {
     if (window.document.activeElement instanceof HTMLButtonElement) {
       window.document.activeElement.blur();
     }

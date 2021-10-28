@@ -7,24 +7,40 @@ const App = () => {
 
   const onPopupCloseBtnClick = () => {
     if (window.ReactNativeWebView) {
-      window.ReactNativeWebView.postMessage('update:SignUpPopup:false');
+      window.ReactNativeWebView.postMessage('update:signUpPopup:false');
     }
   };
 
   const onSignInBtnClick = () => {
     if (window.ReactNativeWebView) {
-      window.ReactNativeWebView.postMessage('update:SignInPopup:true');
+      window.ReactNativeWebView.postMessage('update:signInPopup:true');
+    }
+  };
+
+  const onGetSecretKeyBtnClick = (viewId, data) => {
+    if (window.ReactNativeWebView) {
+      window.ReactNativeWebView.postMessage('update:viewId&walletData:' + viewId + ':' + JSON.stringify(data));
+    }
+  };
+
+  const onUpdateViewIdBtnClick = (data) => {
+    if (window.ReactNativeWebView) {
+      window.ReactNativeWebView.postMessage('update:viewId:' + data);
     }
   };
 
   const onBackedUpBtnClick = (data) => {
     if (window.ReactNativeWebView) {
-      window.ReactNativeWebView.postMessage('update:UserData:' + JSON.stringify(data));
+      window.ReactNativeWebView.postMessage('update:userData:' + JSON.stringify(data));
     }
   };
 
-  const updateSignUpProps = (domainName, appName, appIconUrl, appScopes) => {
-    setSignUpProps({ domainName, appName, appIconUrl, appScopes: appScopes.split(',') });
+  const updateSignUpProps = (domainName, appName, appIconUrl, appScopes, viewId, walletData) => {
+    setSignUpProps({
+      domainName, appName, appIconUrl, appScopes: appScopes.split(','),
+      viewId: parseInt(viewId, 10),
+      walletData: walletData ? JSON.parse(walletData) : null,
+    });
   };
 
   useEffect(() => {
@@ -37,10 +53,10 @@ const App = () => {
 
   if (!signUpProps) return null;
 
-  const { domainName, appName, appIconUrl, appScopes } = signUpProps;
+  const { domainName, appName, appIconUrl, appScopes, viewId, walletData } = signUpProps;
 
   return (
-    <SignUp domainName={domainName} appName={appName} appIconUrl={appIconUrl} appScopes={appScopes} onPopupCloseBtnClick={onPopupCloseBtnClick} onSignInBtnClick={onSignInBtnClick} onBackedUpBtnClick={onBackedUpBtnClick} />
+    <SignUp domainName={domainName} appName={appName} appIconUrl={appIconUrl} appScopes={appScopes} viewId={viewId} walletData={walletData} onPopupCloseBtnClick={onPopupCloseBtnClick} onSignInBtnClick={onSignInBtnClick} onGetSecretKeyBtnClick={onGetSecretKeyBtnClick} onUpdateViewIdBtnClick={onUpdateViewIdBtnClick} onBackedUpBtnClick={onBackedUpBtnClick} />
   );
 };
 
