@@ -171,8 +171,8 @@ const SignIn = (props) => {
                   <div className="w-10 h-10 bg-blue-300 rounded-full overflow-hidden flex-shrink-0 flex justify-center items-center group-hover:bg-blue-400">
                     {accountImage}
                   </div>
-                  <div className="ml-3.5">
-                    <p className="text-sm text-gray-600 group-hover:text-gray-700">{account.username || `Account${i + 1}`}</p>
+                  <div className="ml-3.5 flex-grow flex-shrink">
+                    <p className="text-sm text-gray-600 text-left group-hover:text-gray-700">{account.username || `Account${i + 1}`}</p>
                   </div>
                 </button>
               </li>
