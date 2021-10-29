@@ -10,12 +10,12 @@ const VIEW_CHOOSE = 2;
 const SignIn = (props) => {
 
   const { domainName, appName, appIconUrl, appScopes } = props;
-  const [viewId, setViewId] = useState(VIEW_YOUR);
+  const [viewId, setViewId] = useState(props.viewId);
   const [isLoadingShown, setLoadingShown] = useState(false);
   const [isErrorShown, setErrorShown] = useState(false);
   const [secretKeyInput, setSecretKeyInput] = useState('');
   const [errMsg, setErrMsg] = useState('');
-  const walletData = useRef(null);
+  const walletData = useRef(props.walletData);
   const textarea = useRef(null);
   const didClick = useRef(false);
 
@@ -36,15 +36,17 @@ const SignIn = (props) => {
 
         if (data.errMsg) {
           setErrMsg(data.errMsg);
-        } else {
-          walletData.current = data;
-
-          if (walletData.current.wallet.accounts.length === 1) {
-            onChooseAccount(0);
-          } else {
-            setViewId(VIEW_CHOOSE);
-          }
+          return;
         }
+
+        walletData.current = data;
+        if (walletData.current.wallet.accounts.length === 1) {
+          onChooseAccount(0);
+          return;
+        }
+
+        props.onContinueBtnClick(VIEW_CHOOSE, data);
+        setViewId(VIEW_CHOOSE);
       }).catch((e) => {
         console.log('onContinueBtnClick error: ', e);
         didClick.current = false;
@@ -52,10 +54,6 @@ const SignIn = (props) => {
         setErrorShown(true);
       });
     }, 1);
-  };
-
-  const onSignUpBtnClick = () => {
-    props.onSignUpBtnClick();
   };
 
   const onChooseAccount = (accountIndex) => {
@@ -125,7 +123,7 @@ const SignIn = (props) => {
           <button onClick={onContinueBtnClick} className="w-full py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-600" type="button">Continue</button>
         </div>
         <div className="flex mt-24 pt-2 mb-1.5 sm:mt-28 sm:pt-1">
-          <button onClick={onSignUpBtnClick} className="text-sm font-medium text-blue-700 rounded-sm hover:text-blue-800 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-1 focus-visible:ring-blue-600" type="button">Sign up</button>
+          <button onClick={props.onSignUpBtnClick} className="text-sm font-medium text-blue-700 rounded-sm hover:text-blue-800 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-1 focus-visible:ring-blue-600" type="button">Sign up</button>
         </div>
       </React.Fragment>
     );

@@ -72,9 +72,9 @@ const SignUp = (props) => {
         didClick.current = false;
         setLoadingShown(false);
 
-        props.onGetSecretKeyBtnClick(VIEW_YOUR, data);
-
         walletData.current = data;
+
+        props.onGetSecretKeyBtnClick(VIEW_YOUR, data);
         setViewId(VIEW_YOUR);
       }).catch((e) => {
         console.log('onGetSecretKeyBtnClick error: ', e);
