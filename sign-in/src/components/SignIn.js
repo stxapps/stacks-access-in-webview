@@ -84,7 +84,11 @@ const SignIn = (props) => {
     }
 
     window.scrollTo(0, 0);
-    if (viewId === VIEW_YOUR) setTimeout(() => textarea.current.focus(), 1);
+    if (viewId === VIEW_YOUR) {
+      setTimeout(() => {
+        if (textarea.current) textarea.current.focus();
+      }, 100);
+    }
   }, [viewId]);
 
   const _render = (content) => {
