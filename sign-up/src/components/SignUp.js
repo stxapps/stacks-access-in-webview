@@ -192,9 +192,8 @@ const SignUp = (props) => {
         <div className="pt-5">
           <button onClick={onGetSecretKeyBtnClick} className="w-full py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-600" type="button">Get your Secret Key</button>
         </div>
-        <div className="flex mt-10 pt-1 mb-1.5">
-          <button onClick={props.onSignInBtnClick} className="text-sm font-medium text-blue-700 rounded-sm hover:text-blue-800 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-1 focus-visible:ring-blue-600" type="button">Sign in</button>
-          <a className="ml-3 text-sm font-medium text-blue-700 rounded-sm hover:text-blue-800 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-1 focus-visible:ring-blue-600" href="https://docs.stacks.co/docs/build-apps/references/authentication#how-it-works" target="_blank" rel="noreferrer">How it works</a>
+        <div className="mt-10 mb-1.5 flex pt-1">
+          <button onClick={props.onSignInBtnClick} className="rounded-sm text-sm font-medium text-blue-700 hover:text-blue-800 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-600 focus-visible:ring-offset-1" type="button">Sign in</button>
         </div>
       </React.Fragment>
     );
