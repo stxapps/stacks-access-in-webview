@@ -136,7 +136,7 @@ const SignUp = (props) => {
           {content}
           <div className="absolute top-0 right-0 p-1">
             <button onClick={props.onPopupCloseBtnClick} className="flex items-center justify-center h-7 w-7 group focus:outline-none" aria-label="Close sign up popup">
-              <svg className="h-5 w-5 text-gray-300 rounded group-hover:text-gray-400 group-focus:ring-2 group-focus:ring-gray-300" stroke="currentColor" fill="none" viewBox="0 0 24 24">
+              <svg className="h-5 w-5 rounded text-gray-400 group-hover:text-gray-500 group-focus:ring-2 group-focus:ring-gray-400" stroke="currentColor" fill="none" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" />
               </svg>
             </button>
