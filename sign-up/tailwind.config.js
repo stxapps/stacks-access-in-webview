@@ -1,32 +1,20 @@
-const colors = require('tailwindcss/colors');
+const plugin = require('tailwindcss/plugin');
 
 module.exports = {
-  purge: [
+  content: [
     './public/**/*.html',
     './src/**/*.{js,jsx,ts,tsx}',
   ],
-  darkMode: 'class',
-  theme: {
-    extend: {
-      colors: {
-        green: colors.green,
-      },
-    },
-  },
-  variants: {
-    extend: {
-      textColor: ['group-focus', 'focus-visible'],
-      ringColor: ['group-focus', 'focus-visible'],
-      ringOffsetColor: ['group-focus', 'focus-visible'],
-      ringOffsetWidth: ['group-focus', 'focus-visible'],
-      ringOpacity: ['group-focus', 'focus-visible'],
-      ringWidth: ['group-hover', 'group-focus', 'hover', 'focus-visible'],
-    },
+  corePlugins: {
+    aspectRatio: false,
   },
   plugins: [
     require('@tailwindcss/forms'),
     require('@tailwindcss/aspect-ratio'),
     require('@tailwindcss/typography'),
     require('@tailwindcss/line-clamp'),
+    plugin(function ({ addVariant }) {
+      addVariant('blk', '&');
+    }),
   ],
 };
