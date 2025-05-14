@@ -5,6 +5,13 @@ module.exports = {
     './public/**/*.html',
     './src/**/*.{js,jsx,ts,tsx}',
   ],
+  theme: {
+    extend: {
+      lineHeight: {
+        '5.5': '1.375rem',
+      },
+    },
+  },
   corePlugins: {
     aspectRatio: false,
   },
